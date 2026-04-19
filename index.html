@@ -310,6 +310,37 @@
     color: var(--burgundy);
   }
 
+  .gcard-media--illustrated {
+    background: var(--bg-cream);
+    border: none;
+    aspect-ratio: 3/2;
+  }
+
+  .gcard-illustration-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gcard-credit {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    background: rgba(255,255,255,0.85);
+    padding: 3px 8px;
+    border-radius: 20px;
+    text-decoration: none;
+  }
+
+  .gcard-credit:hover { background: #fff; }
+
   .gcard-illustration .brief {
     display: block;
     margin-top: 10px;
@@ -1716,16 +1747,11 @@
 
   <div class="graza-cards graza-cards--single">
     <div class="gcard">
-      <div class="gcard-media">
+      <div class="gcard-media gcard-media--illustrated">
         <span class="gcard-tag">BATCH 02</span>
         <span class="gcard-vol">VOL 02</span>
-        <div class="gcard-illustration">
-          <strong>MAY 12 · 6PM</strong>
-          Farm to table<br>
-          with Elias<br>
-          (<a href="https://viriditas.farm/" target="_blank" rel="noopener">Viriditas Farm</a>)
-          <span class="brief">brief: Elias brings veggies straight from his regenerative farm — cook them with him at Akasha House, Poble Nou. Afterwork, 6PM.</span>
-        </div>
+        <img src="CH0075-1536x983.jpg" alt="Illustration of a cutting board with a knife and chopped vegetables" class="gcard-illustration-img">
+        <a href="https://www.theartworksinc.com/artist/claire-harrup/" target="_blank" rel="noopener" class="gcard-credit">ill. Claire Harrup</a>
       </div>
       <div class="gcard-meta-row">
         <span class="gcard-descriptor">MAY 12</span>
