@@ -276,39 +276,89 @@
   .graza-cards--single .gcard {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
-    grid-template-rows: auto auto auto;
-    column-gap: 48px;
-    row-gap: 16px;
+    column-gap: 56px;
     align-items: center;
   }
 
   .graza-cards--single .gcard-media {
-    grid-column: 2;
-    grid-row: 1 / span 3;
+    order: 2;
     margin-bottom: 0;
-    align-self: center;
   }
 
-  .graza-cards--single .gcard-meta-row { grid-column: 1; grid-row: 1; align-self: end; }
-  .graza-cards--single .gcard-title    { grid-column: 1; grid-row: 2; font-size: 40px; }
-  .graza-cards--single .gcard-tagline  { grid-column: 1; grid-row: 3; align-self: start; }
+  .gcard-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .graza-cards--single .gcard-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .graza-cards--single .gcard-title em {
+    font-style: italic;
+    color: var(--tomato);
+  }
+
+  .gcard-subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--burgundy);
+    margin: 10px 0 0;
+  }
+
+  .gcard-when {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+    margin: 22px 0 0;
+  }
+
+  .gcard-text {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 18px 0 0;
+  }
+
+  .gcard-text a {
+    color: var(--tomato);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .gcard-cta {
+    background: var(--lime);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 14px 30px;
+    border-radius: 60px;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    margin-top: 28px;
+    display: inline-block;
+  }
 
   @media (max-width: 780px) {
     .graza-cards--single .gcard {
       grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      row-gap: 16px;
+      row-gap: 28px;
     }
-    .graza-cards--single .gcard-media {
-      grid-column: 1;
-      grid-row: auto;
-    }
-    .graza-cards--single .gcard-meta-row,
-    .graza-cards--single .gcard-title,
-    .graza-cards--single .gcard-tagline {
-      grid-column: 1;
-      grid-row: auto;
-    }
+    .graza-cards--single .gcard-media { order: 0; }
   }
 
   .gcard { display: flex; flex-direction: column; }
@@ -1779,10 +1829,6 @@
 
 <!-- ==================== HOW MEAL PREP SHOULD BE ==================== -->
 <section class="graza-section">
-  <div class="graza-header">
-    <h2 class="graza-headline">Next up: <em>Batch 02.</em></h2>
-  </div>
-
   <div class="graza-cards graza-cards--single">
     <div class="gcard">
       <div class="gcard-media gcard-media--illustrated">
@@ -1791,19 +1837,14 @@
         <img src="CH0075-1536x983.jpg" alt="Illustration of a cutting board with a knife and chopped vegetables" class="gcard-illustration-img">
         <a href="https://www.theartworksinc.com/artist/claire-harrup/" target="_blank" rel="noopener" class="gcard-credit">ill. Claire Harrup</a>
       </div>
-      <div class="gcard-meta-row">
-        <span class="gcard-descriptor">MAY 12</span>
-        <span class="gcard-nickname">"Farm to Table"</span>
-        <span class="gcard-size">POBLE NOU</span>
+      <div class="gcard-body">
+        <h3 class="gcard-title">Next up: <em>Batch 02.</em></h3>
+        <p class="gcard-subtitle">From farm to table</p>
+        <p class="gcard-when">May 12 · Akasha House</p>
+        <p class="gcard-text">Elias is bringing veggies straight from his regenerative farm at <a href="https://viriditas.farm/" target="_blank" rel="noopener">Viriditas</a> — come cook with him at Akasha House, Poble Nou. Afterwork, 6PM.</p>
+        <a href="#" class="gcard-cta">Reserve your spot</a>
       </div>
-      <h3 class="gcard-title">Farm to table with Elias</h3>
-      <p class="gcard-tagline">Straight from the field, cooked with the grower himself.</p>
     </div>
-  </div>
-
-  <div class="graza-cta-wrap">
-    <a href="#" class="graza-cta">Reserve a seat →</a>
-    <div class="graza-checkered"></div>
   </div>
 </section>
 
