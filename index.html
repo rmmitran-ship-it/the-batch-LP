@@ -975,6 +975,111 @@
     opacity: 0.85;
   }
 
+
+  /* Graza-inspired horizontal timeline */
+  .how-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+  }
+
+  .how-col {
+    padding: 40px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 560px;
+    position: relative;
+  }
+
+  .how-col-1 { background: var(--bg-cream); }
+  .how-col-2 { background: var(--bg-butter); }
+  .how-col-3 { background: var(--bg-pink); }
+  .how-col-4 { background: var(--bg-blue); }
+
+  .how-body {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 230px;
+    margin: 0 auto 28px;
+    min-height: 78px;
+  }
+
+  .how-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(30px, 3.4vw, 46px);
+    line-height: 1;
+    color: var(--ink);
+    margin: 0 0 auto;
+    padding-bottom: 36px;
+  }
+
+  .how-illu {
+    margin-top: auto;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .how-illu svg { width: 100%; height: 100%; }
+
+  /* Dashed timeline running across all 4 columns */
+  .how-axis {
+    position: absolute;
+    top: 58%;
+    left: 28px;
+    right: 28px;
+    height: 0;
+    border-top: 2px dashed rgba(26, 26, 26, 0.45);
+    pointer-events: none;
+  }
+
+  .how-axis-dot {
+    position: absolute;
+    top: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+    transform: translateX(-50%);
+  }
+
+  .how-axis-label {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    top: -22px;
+    text-transform: uppercase;
+    background: var(--panel);
+    padding: 2px 6px;
+    border-radius: 20px;
+  }
+  .how-axis-start { left: -6px; }
+  .how-axis-end   { right: -6px; }
+
+  @media (max-width: 900px) {
+    .how-timeline { grid-template-columns: 1fr; border-radius: 14px; }
+    .how-col { min-height: auto; padding: 32px 20px 28px; }
+    .how-axis { display: none; }
+    .how-label { padding-bottom: 20px; }
+  }
+
+  /* Legacy .how-steps CSS below — orphaned, kept for now */
+
   .how-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1702,12 +1807,11 @@
       <p class="how-lede">Cooking for one is slow, repetitive, and quietly lonely. Let's Batch flips it.</p>
     </div>
 
-    <div class="how-steps">
-      <div class="step">
-        <div class="step-num">STEP 01</div>
-        <div class="step-illustration">
-          <span class="step-illu-label">ILLU 01</span>
-          <svg class="step-illu-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <div class="how-timeline">
+      <div class="how-col how-col-1">
+        <p class="how-body">Pick your seat on Luma — solo, pair, or table of four. Twelve people max.</p>
+        <p class="how-label">&ldquo;Book.&rdquo;</p>
+        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <!-- Phone held in hand, tapping Luma -->
             <rect x="70" y="30" width="80" height="130" rx="10" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2.5"/>
             <rect x="78" y="42" width="64" height="100" rx="4" fill="#c9d93d"/>
@@ -1720,18 +1824,12 @@
             <path d="M 30 85 L 45 80" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
             <path d="M 25 105 L 42 105" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
             <path d="M 30 125 L 45 130" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <div class="step-illu-brief">thumb tapping "book" on Luma</div>
-        </div>
-        <h3 class="step-title">Book your seat</h3>
-        <p class="step-desc">Solo, pair, or table of four. We cap at 12.</p>
+          </svg></div>
       </div>
-
-      <div class="step">
-        <div class="step-num">STEP 02</div>
-        <div class="step-illustration">
-          <span class="step-illu-label">ILLU 02</span>
-          <svg class="step-illu-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <div class="how-col how-col-2">
+        <p class="how-body">Sunday at 11:00 in Poble Nou. Apron tied, coffee going.</p>
+        <p class="how-label">&ldquo;Show up.&rdquo;</p>
+        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <!-- Apron being tied -->
             <!-- Apron body -->
             <path d="M 70 60 L 70 160 Q 70 170 80 170 L 120 170 Q 130 170 130 160 L 130 60 L 115 50 L 85 50 Z"
@@ -1746,18 +1844,12 @@
             <ellipse cx="160" cy="115" rx="12" ry="16" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2"/>
             <!-- Small pocket detail -->
             <rect x="85" y="120" width="30" height="25" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-          </svg>
-          <div class="step-illu-brief">two hands tying an apron behind the back</div>
-        </div>
-        <h3 class="step-title">Arrive & prep</h3>
-        <p class="step-desc">Kitchen's set. Coffee's on. Chopping starts 11.</p>
+          </svg></div>
       </div>
-
-      <div class="step">
-        <div class="step-num">STEP 03</div>
-        <div class="step-illustration">
-          <span class="step-illu-label">ILLU 03</span>
-          <svg class="step-illu-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <div class="how-col how-col-3">
+        <p class="how-body">Three hours, five dishes, music on. Real food, KM 0.</p>
+        <p class="how-label">&ldquo;Cook.&rdquo;</p>
+        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <!-- Pot POV -->
             <!-- Steam -->
             <path d="M 70 20 Q 75 30 70 45 Q 65 55 70 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
@@ -1775,18 +1867,12 @@
             <!-- Wooden spoon coming in from side -->
             <rect x="130" y="50" width="50" height="6" rx="2" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 155 53)"/>
             <ellipse cx="140" cy="75" rx="10" ry="15" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 140 75)"/>
-          </svg>
-          <div class="step-illu-brief">POV looking down into a simmering pot</div>
-        </div>
-        <h3 class="step-title">Cook together</h3>
-        <p class="step-desc">5 dishes, 3 hours. Real food, KM 0.</p>
+          </svg></div>
       </div>
-
-      <div class="step">
-        <div class="step-num">STEP 04</div>
-        <div class="step-illustration">
-          <span class="step-illu-label">ILLU 04</span>
-          <svg class="step-illu-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <div class="how-col how-col-4">
+        <p class="how-body">Leave with tupperware. Five lunches or dinners — the week is sorted.</p>
+        <p class="how-label">&ldquo;Take home.&rdquo;</p>
+        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <!-- Tote bag -->
             <!-- Handle -->
             <path d="M 75 30 Q 75 10 100 10 Q 125 10 125 30" fill="none" stroke="#1a1a1a" stroke-width="3"/>
@@ -1803,11 +1889,15 @@
             <ellipse cx="110" cy="38" rx="8" ry="25" fill="#d8a060" stroke="#1a1a1a" stroke-width="2" transform="rotate(15 110 38)"/>
             <!-- Herbs -->
             <path d="M 90 35 L 88 20 M 90 35 L 85 25 M 90 35 L 92 20" stroke="#8ca96a" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <div class="step-illu-brief">tote with 5 stacked containers + baguette</div>
-        </div>
-        <h3 class="step-title">Take home 5 meals</h3>
-        <p class="step-desc">Lunch and dinner sorted for the week.</p>
+          </svg></div>
+      </div>
+      <div class="how-axis" aria-hidden="true">
+        <span class="how-axis-label how-axis-start">MON</span>
+        <span class="how-axis-dot" style="left: 12.5%"></span>
+        <span class="how-axis-dot" style="left: 37.5%"></span>
+        <span class="how-axis-dot" style="left: 62.5%"></span>
+        <span class="how-axis-dot" style="left: 87.5%"></span>
+        <span class="how-axis-label how-axis-end">ALL WEEK</span>
       </div>
     </div>
   </div>
