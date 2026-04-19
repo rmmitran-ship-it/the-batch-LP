@@ -1,0 +1,18 @@
+{
+  "vol": "04",
+  "date": "2026-05-17T11:00:00+02:00",
+  "endTime": "2026-05-17T14:30:00+02:00",
+  "location": {
+    "neighborhood": "Poble Nou",
+    "city": "Barcelona"
+  },
+  "seatsTotal": 12,
+  "seatsLeft": 8,
+  "lumaUrl": "https://lu.ma/the-batch-vol-04",
+  "earlyBirdEndsAt": "2026-04-27T23:59:00+02:00",
+  "prices": {
+    "solo": { "full": 65, "earlyBird": 55 },
+    "pair": { "full": 120, "earlyBird": 100 },
+    "tableOfFour": { "full": 220, "earlyBird": 180 }
+  }
+}
