@@ -1,0 +1,109 @@
+---
+import eventData from '../data/event.json';
+
+// Derive ribbon copy from event.json so it never drifts out of sync.
+// Format in Europe/Madrid to match the event's local time.
+const eventDate = new Date(eventData.date);
+const formatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Europe/Madrid',
+  month: 'long',
+  day: 'numeric',
+});
+const parts = formatter.formatToParts(eventDate);
+const month = parts.find((p) => p.type === 'month')?.value.toUpperCase() ?? '';
+const day = parts.find((p) => p.type === 'day')?.value ?? '';
+
+const cityShort = eventData.location.city === 'Barcelona' ? 'BCN' : eventData.location.city.toUpperCase();
+const locationText = `${eventData.location.neighborhood.toUpperCase()}, ${cityShort}`;
+const seatsText = `${eventData.seatsLeft} SEATS LEFT`;
+
+const items = [
+  `COMING UP · ${month} ${day}`,
+  seatsText,
+  locationText,
+  'BOOK THE NEXT BATCH',
+];
+---
+<div class="hero-ribbon">
+  <div class="ribbon-track">
+    <div class="ribbon-item">
+      {items.map((item) => (
+        <>
+          <span>{item}</span>
+          <span class="sep">✻</span>
+        </>
+      ))}
+    </div>
+    <div class="ribbon-item" aria-hidden="true">
+      {items.map((item) => (
+        <>
+          <span>{item}</span>
+          <span class="sep">✻</span>
+        </>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-ribbon {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: var(--lime);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 14px 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    color: var(--ink);
+    text-transform: uppercase;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+
+  .ribbon-track {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding-right: 32px;
+    animation: ribbon-scroll 30s linear infinite;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .ribbon-item {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-shrink: 0;
+  }
+
+  .ribbon-item span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ribbon-item .sep {
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  @keyframes ribbon-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .hero-ribbon:hover .ribbon-track {
+    animation-play-state: paused;
+  }
+
+  /* Respect reduced-motion preference — pause the marquee if the user has it on. */
+  @media (prefers-reduced-motion: reduce) {
+    .ribbon-track { animation: none; }
+  }
+</style>

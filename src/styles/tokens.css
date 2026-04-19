@@ -1,0 +1,34 @@
+/* The Batch — design tokens
+ * Source of truth: index.html wireframe (Peel Club-inspired palette).
+ * Any BRAND.md colour rule should resolve to one of these variables.
+ * Legacy aliases (--bg, --bg-alt, --bg-sage, --bg-orange, --tomato) have been
+ * removed — do not re-introduce them. If you need a colour not in this list,
+ * discuss before adding.
+ */
+
+:root {
+  /* Pastel backgrounds (the grounds) */
+  --bg-pink: #f7c9cc;
+  --bg-butter: #f5efb9;
+  --bg-blue: #c5dce8;
+  --bg-cream: #faf3d4;
+
+  /* Saturated accents (the "pops") */
+  --hot-orange: #ff4f1a;
+  --lime: #c9d93d;
+  --lime-dark: #a8b832; /* hover state only */
+  --burgundy: #a81e4a;
+  --hot-pink: #ff7a9c;
+
+  /* Ink */
+  --ink: #1a1a1a;
+  --ink-soft: #3a3a3a;
+
+  /* Photo stone neutral (for Graza-card placeholders) */
+  --stone: #e8e0d0;
+  --stone-dark: #c8c0b0;
+
+  /* Panel / cream surface */
+  --panel: #fcf8ea;
+  --cream: #fcf8ea;
+}

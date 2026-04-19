@@ -1,0 +1,55 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "A Sunday cooking club in Barcelona. Twelve people, five dishes, three hours. Everyone leaves with a week of meals.",
+  ogImage,
+} = Astro.props;
+
+const siteBase = import.meta.env.BASE_URL;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = ogImage ?? `${siteBase.replace(/\/$/, '')}/images/batch-01.jpg`;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titan+One&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Analytics: Umami Cloud (see ANALYTICS.md). Uncomment and swap in the
+         site ID once the domain is live.
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="REPLACE_WITH_UMAMI_SITE_ID"
+    ></script>
+    -->
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

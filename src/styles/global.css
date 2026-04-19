@@ -1,0 +1,33 @@
+/* The Batch — global base styles
+ * Keep this file small. Component-specific styles live in each .astro file's
+ * <style> block (scoped by default).
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-pink);
+  font-family: 'Fraunces', serif;
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a { color: inherit; }
+
+/* Global responsive break — matches the wireframe. Section-level responsive
+ * rules (grid collapses, etc.) are re-added in each component as we port it.
+ */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+}
