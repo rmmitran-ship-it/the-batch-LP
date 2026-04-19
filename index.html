@@ -1071,6 +1071,85 @@
   .how-axis-start { left: -6px; }
   .how-axis-end   { right: -6px; }
 
+  /* --- Scroll-linked interaction -------------------------------------------
+   * .how-track is the tall scroll-bed (~2.5 viewports) that creates room for
+   * the sticky child to scrub. JS listens to scroll and writes progress
+   * (0→1) onto .how-timeline as a data-progress attribute and a CSS var
+   * --p, which drives the axis bar, marker position, and column reveals. */
+  .how-track {
+    position: relative;
+    min-height: 260vh;
+  }
+
+  .how-sticky {
+    position: sticky;
+    top: 12vh;
+  }
+
+  /* Column reveal: dim by default, pop to full when their step is reached. */
+  .how-col {
+    opacity: 0.28;
+    filter: saturate(0.55);
+    transform: translateY(12px);
+    transition:
+      opacity 0.55s cubic-bezier(.22,.61,.36,1),
+      filter 0.55s cubic-bezier(.22,.61,.36,1),
+      transform 0.55s cubic-bezier(.22,.61,.36,1);
+  }
+  .how-col.is-active {
+    opacity: 1;
+    filter: saturate(1);
+    transform: translateY(0);
+  }
+
+  /* Solid progress bar drawn over the dashed axis, matching its line. */
+  .how-axis-progress {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--ink);
+    transition: width 0.12s linear;
+    pointer-events: none;
+  }
+
+  /* The moving marker dot — bigger than the static axis dots, orange pop. */
+  .how-axis-marker {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--hot-orange);
+    border: 2px solid var(--ink);
+    transform: translateX(-50%);
+    transition: left 0.12s linear;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Mobile / reduced-motion: no sticky pin, all columns active, hide marker. */
+  @media (max-width: 900px) {
+    .how-track { min-height: 0; }
+    .how-sticky { position: static; top: auto; }
+    .how-col { opacity: 1; filter: none; transform: none; }
+    .how-axis-progress, .how-axis-marker { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .how-track { min-height: 0; }
+    .how-sticky { position: static; top: auto; }
+    .how-col {
+      opacity: 1; filter: none; transform: none;
+      transition: none;
+    }
+    .how-axis-progress, .how-axis-marker { display: none; }
+  }
+
+
+
   @media (max-width: 900px) {
     .how-timeline { grid-template-columns: 1fr; border-radius: 14px; }
     .how-col { min-height: auto; padding: 32px 20px 28px; }
@@ -1807,97 +1886,103 @@
       <p class="how-lede">Cooking for one is slow, repetitive, and quietly lonely. Let's Batch flips it.</p>
     </div>
 
-    <div class="how-timeline">
-      <div class="how-col how-col-1">
-        <p class="how-body">Pick your seat on Luma — solo, pair, or table of four. Twelve people max.</p>
-        <p class="how-label">&ldquo;Book.&rdquo;</p>
-        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <!-- Phone held in hand, tapping Luma -->
-            <rect x="70" y="30" width="80" height="130" rx="10" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2.5"/>
-            <rect x="78" y="42" width="64" height="100" rx="4" fill="#c9d93d"/>
-            <circle cx="110" cy="92" r="18" fill="#1a1a1a"/>
-            <text x="110" y="97" font-family="Inter" font-size="10" fill="#c9d93d" text-anchor="middle" font-weight="700">BOOK</text>
-            <!-- Thumb pressing -->
-            <ellipse cx="60" cy="130" rx="18" ry="28" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2.5" transform="rotate(-25 60 130)"/>
-            <ellipse cx="50" cy="115" rx="8" ry="10" fill="#a01e2e" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(-25 50 115)"/>
-            <!-- Motion lines -->
-            <path d="M 30 85 L 45 80" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
-            <path d="M 25 105 L 42 105" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
-            <path d="M 30 125 L 45 130" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
-          </svg></div>
-      </div>
-      <div class="how-col how-col-2">
-        <p class="how-body">Sunday at 11:00 in Poble Nou. Apron tied, coffee going.</p>
-        <p class="how-label">&ldquo;Show up.&rdquo;</p>
-        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <!-- Apron being tied -->
-            <!-- Apron body -->
-            <path d="M 70 60 L 70 160 Q 70 170 80 170 L 120 170 Q 130 170 130 160 L 130 60 L 115 50 L 85 50 Z"
-                  fill="#c9d93d" stroke="#1a1a1a" stroke-width="2.5"/>
-            <!-- Neck strap -->
-            <path d="M 85 50 Q 100 20 115 50" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-            <!-- Waist strings going around back -->
-            <path d="M 70 105 Q 50 100 30 110" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-            <path d="M 130 105 Q 150 100 170 110" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-            <!-- Hands tying the bow -->
-            <ellipse cx="40" cy="115" rx="12" ry="16" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2"/>
-            <ellipse cx="160" cy="115" rx="12" ry="16" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2"/>
-            <!-- Small pocket detail -->
-            <rect x="85" y="120" width="30" height="25" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
-          </svg></div>
-      </div>
-      <div class="how-col how-col-3">
-        <p class="how-body">Three hours, five dishes, music on. Real food, KM 0.</p>
-        <p class="how-label">&ldquo;Cook.&rdquo;</p>
-        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <!-- Pot POV -->
-            <!-- Steam -->
-            <path d="M 70 20 Q 75 30 70 45 Q 65 55 70 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-            <path d="M 100 15 Q 105 30 100 45 Q 95 55 100 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-            <path d="M 130 20 Q 135 30 130 45 Q 125 55 130 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-            <!-- Pot -->
-            <ellipse cx="100" cy="80" rx="60" ry="12" fill="#1a1a1a"/>
-            <path d="M 40 80 L 45 150 Q 45 160 55 160 L 145 160 Q 155 160 155 150 L 160 80 Z"
-                  fill="#a81e4a" stroke="#1a1a1a" stroke-width="2.5"/>
-            <!-- Pot contents (top) -->
-            <ellipse cx="100" cy="80" rx="55" ry="8" fill="#c9d93d"/>
-            <circle cx="80" cy="78" r="5" fill="#ff4f1a"/>
-            <circle cx="115" cy="82" r="4" fill="#ff4f1a"/>
-            <circle cx="95" cy="84" r="3" fill="#ff4f1a"/>
-            <!-- Wooden spoon coming in from side -->
-            <rect x="130" y="50" width="50" height="6" rx="2" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 155 53)"/>
-            <ellipse cx="140" cy="75" rx="10" ry="15" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 140 75)"/>
-          </svg></div>
-      </div>
-      <div class="how-col how-col-4">
-        <p class="how-body">Leave with tupperware. Five lunches or dinners — the week is sorted.</p>
-        <p class="how-label">&ldquo;Take home.&rdquo;</p>
-        <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <!-- Tote bag -->
-            <!-- Handle -->
-            <path d="M 75 30 Q 75 10 100 10 Q 125 10 125 30" fill="none" stroke="#1a1a1a" stroke-width="3"/>
-            <!-- Bag body -->
-            <path d="M 50 30 L 60 170 Q 60 180 70 180 L 130 180 Q 140 180 140 170 L 150 30 Z"
-                  fill="#f5efb9" stroke="#1a1a1a" stroke-width="2.5"/>
-            <!-- Tupperware stack inside -->
-            <rect x="68" y="55" width="64" height="18" rx="2" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2"/>
-            <rect x="68" y="75" width="64" height="18" rx="2" fill="#a81e4a" stroke="#1a1a1a" stroke-width="2"/>
-            <rect x="68" y="95" width="64" height="18" rx="2" fill="#c9d93d" stroke="#1a1a1a" stroke-width="2"/>
-            <rect x="68" y="115" width="64" height="18" rx="2" fill="#ff4f1a" stroke="#1a1a1a" stroke-width="2"/>
-            <rect x="68" y="135" width="64" height="18" rx="2" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2"/>
-            <!-- Baguette poking out -->
-            <ellipse cx="110" cy="38" rx="8" ry="25" fill="#d8a060" stroke="#1a1a1a" stroke-width="2" transform="rotate(15 110 38)"/>
-            <!-- Herbs -->
-            <path d="M 90 35 L 88 20 M 90 35 L 85 25 M 90 35 L 92 20" stroke="#8ca96a" stroke-width="2" stroke-linecap="round"/>
-          </svg></div>
-      </div>
-      <div class="how-axis" aria-hidden="true">
-        <span class="how-axis-label how-axis-start">MON</span>
-        <span class="how-axis-dot" style="left: 12.5%"></span>
-        <span class="how-axis-dot" style="left: 37.5%"></span>
-        <span class="how-axis-dot" style="left: 62.5%"></span>
-        <span class="how-axis-dot" style="left: 87.5%"></span>
-        <span class="how-axis-label how-axis-end">ALL WEEK</span>
+    <div class="how-track">
+      <div class="how-sticky">
+        <div class="how-timeline">
+          <div class="how-col how-col-1">
+            <p class="how-body">Pick your seat on Luma — solo, pair, or table of four. Twelve people max.</p>
+            <p class="how-label">&ldquo;Book.&rdquo;</p>
+            <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Phone held in hand, tapping Luma -->
+                <rect x="70" y="30" width="80" height="130" rx="10" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2.5"/>
+                <rect x="78" y="42" width="64" height="100" rx="4" fill="#c9d93d"/>
+                <circle cx="110" cy="92" r="18" fill="#1a1a1a"/>
+                <text x="110" y="97" font-family="Inter" font-size="10" fill="#c9d93d" text-anchor="middle" font-weight="700">BOOK</text>
+                <!-- Thumb pressing -->
+                <ellipse cx="60" cy="130" rx="18" ry="28" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2.5" transform="rotate(-25 60 130)"/>
+                <ellipse cx="50" cy="115" rx="8" ry="10" fill="#a01e2e" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(-25 50 115)"/>
+                <!-- Motion lines -->
+                <path d="M 30 85 L 45 80" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 25 105 L 42 105" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 30 125 L 45 130" stroke="#a81e4a" stroke-width="2" stroke-linecap="round"/>
+              </svg></div>
+          </div>
+          <div class="how-col how-col-2">
+            <p class="how-body">Sunday at 11:00 in Poble Nou. Apron tied, coffee going.</p>
+            <p class="how-label">&ldquo;Show up.&rdquo;</p>
+            <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Apron being tied -->
+                <!-- Apron body -->
+                <path d="M 70 60 L 70 160 Q 70 170 80 170 L 120 170 Q 130 170 130 160 L 130 60 L 115 50 L 85 50 Z"
+                      fill="#c9d93d" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Neck strap -->
+                <path d="M 85 50 Q 100 20 115 50" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Waist strings going around back -->
+                <path d="M 70 105 Q 50 100 30 110" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <path d="M 130 105 Q 150 100 170 110" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Hands tying the bow -->
+                <ellipse cx="40" cy="115" rx="12" ry="16" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2"/>
+                <ellipse cx="160" cy="115" rx="12" ry="16" fill="#f2c4a8" stroke="#1a1a1a" stroke-width="2"/>
+                <!-- Small pocket detail -->
+                <rect x="85" y="120" width="30" height="25" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+              </svg></div>
+          </div>
+          <div class="how-col how-col-3">
+            <p class="how-body">Three hours, five dishes, music on. Real food, KM 0.</p>
+            <p class="how-label">&ldquo;Cook.&rdquo;</p>
+            <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pot POV -->
+                <!-- Steam -->
+                <path d="M 70 20 Q 75 30 70 45 Q 65 55 70 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                <path d="M 100 15 Q 105 30 100 45 Q 95 55 100 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                <path d="M 130 20 Q 135 30 130 45 Q 125 55 130 65" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                <!-- Pot -->
+                <ellipse cx="100" cy="80" rx="60" ry="12" fill="#1a1a1a"/>
+                <path d="M 40 80 L 45 150 Q 45 160 55 160 L 145 160 Q 155 160 155 150 L 160 80 Z"
+                      fill="#a81e4a" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Pot contents (top) -->
+                <ellipse cx="100" cy="80" rx="55" ry="8" fill="#c9d93d"/>
+                <circle cx="80" cy="78" r="5" fill="#ff4f1a"/>
+                <circle cx="115" cy="82" r="4" fill="#ff4f1a"/>
+                <circle cx="95" cy="84" r="3" fill="#ff4f1a"/>
+                <!-- Wooden spoon coming in from side -->
+                <rect x="130" y="50" width="50" height="6" rx="2" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 155 53)"/>
+                <ellipse cx="140" cy="75" rx="10" ry="15" fill="#c49562" stroke="#1a1a1a" stroke-width="1.5" transform="rotate(25 140 75)"/>
+              </svg></div>
+          </div>
+          <div class="how-col how-col-4">
+            <p class="how-body">Leave with tupperware. Five lunches or dinners — the week is sorted.</p>
+            <p class="how-label">&ldquo;Take home.&rdquo;</p>
+            <div class="how-illu"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tote bag -->
+                <!-- Handle -->
+                <path d="M 75 30 Q 75 10 100 10 Q 125 10 125 30" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+                <!-- Bag body -->
+                <path d="M 50 30 L 60 170 Q 60 180 70 180 L 130 180 Q 140 180 140 170 L 150 30 Z"
+                      fill="#f5efb9" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Tupperware stack inside -->
+                <rect x="68" y="55" width="64" height="18" rx="2" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="68" y="75" width="64" height="18" rx="2" fill="#a81e4a" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="68" y="95" width="64" height="18" rx="2" fill="#c9d93d" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="68" y="115" width="64" height="18" rx="2" fill="#ff4f1a" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="68" y="135" width="64" height="18" rx="2" fill="#faf3d4" stroke="#1a1a1a" stroke-width="2"/>
+                <!-- Baguette poking out -->
+                <ellipse cx="110" cy="38" rx="8" ry="25" fill="#d8a060" stroke="#1a1a1a" stroke-width="2" transform="rotate(15 110 38)"/>
+                <!-- Herbs -->
+                <path d="M 90 35 L 88 20 M 90 35 L 85 25 M 90 35 L 92 20" stroke="#8ca96a" stroke-width="2" stroke-linecap="round"/>
+              </svg></div>
+          </div>
+          <div class="how-axis" aria-hidden="true">
+            <div class="how-axis-progress"></div>
+            <div class="how-axis-marker"></div>
+            <span class="how-axis-label how-axis-start">MON</span>
+            <span class="how-axis-dot" style="left: 12.5%"></span>
+            <span class="how-axis-dot" style="left: 37.5%"></span>
+            <span class="how-axis-dot" style="left: 62.5%"></span>
+            <span class="how-axis-dot" style="left: 87.5%"></span>
+            <span class="how-axis-label how-axis-end">ALL WEEK</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2073,5 +2158,57 @@
 </section>
 
 
+<script>
+  // How-it-works scroll-linked progression.
+  (function () {
+    const track = document.querySelector('.how-track');
+    const timeline = document.querySelector('.how-timeline');
+    if (!track || !timeline) return;
+
+    // Honour reduced-motion — give everyone the end state, no scroll hookup.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      timeline.querySelectorAll('.how-col').forEach((c) => c.classList.add('is-active'));
+      return;
+    }
+
+    const cols = Array.from(timeline.querySelectorAll('.how-col'));
+    const bar = timeline.querySelector('.how-axis-progress');
+    const marker = timeline.querySelector('.how-axis-marker');
+    let raf = 0;
+
+    function update() {
+      raf = 0;
+      // Skip the effect on narrow viewports — layout is stacked.
+      if (window.innerWidth <= 900) {
+        cols.forEach((c) => c.classList.add('is-active'));
+        return;
+      }
+      const rect = track.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const scrollable = rect.height - vh;
+      if (scrollable <= 0) return;
+      const p = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+      if (bar) bar.style.width = (p * 100).toFixed(2) + '%';
+      if (marker) marker.style.left = (p * 100).toFixed(2) + '%';
+
+      // Reveal columns as the marker crosses their reveal threshold.
+      // Col 1 unlocks immediately; cols 2/3/4 unlock at 25/50/75% progress.
+      const n = cols.length;
+      cols.forEach((c, i) => {
+        c.classList.toggle('is-active', p >= i / n);
+      });
+    }
+
+    function onScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+</script>
 </body>
 </html>
