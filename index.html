@@ -9,36 +9,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Peel Club-inspired palette — pastel grounds + saturated accents */
+    /* Earth-tone palette (from the reference image) */
 
-    /* Pastel backgrounds (the grounds) */
-    --bg-pink: #f7c9cc;
-    --bg-butter: #f5efb9;
-    --bg-blue: #c5dce8;
-    --bg-cream: #faf3d4;
+    /* Pastel grounds */
+    --bg-pink:    #f3e8d5;  /* cream — hero/nav ground */
+    --bg-butter:  #d9d6b5;  /* sage  — kitchen strip / secondary sections */
+    --bg-blue:    #d9d6b5;  /* sage  — graza 3-card ground (was cool blue) */
+    --bg-cream:   #f3e8d5;  /* cream */
 
-    /* Saturated accents (the "pops") */
-    --hot-orange: #ff4f1a;
-    --lime: #c9d93d;
-    --burgundy: #a81e4a;
-    --hot-pink: #ff7a9c;
+    /* Saturated accents */
+    --hot-orange: #c84d1c;  /* rust  — hero wordmark, past-batches bg, big moments */
+    --lime:       #e89548;  /* light orange — CTAs, ribbon, badges, arrow circles */
+    --burgundy:   #c84d1c;  /* rust — italic-serif accents */
+    --hot-pink:   #e89548;  /* light orange */
 
-    /* Keep lime-dark as hover state */
-    --lime-dark: #a8b832;
+    /* Hover state for lime pills */
+    --lime-dark:  #b87530;
 
-    /* Ink */
-    --ink: #1a1a1a;
-    --ink-soft: #3a3a3a;
+    /* Ink — now dark forest green instead of near-black */
+    --ink:        #0f2a22;
+    --ink-soft:   #2c4237;
 
-    /* Photo stone neutral */
-    --stone: #e8e0d0;
+    /* Photo stone neutral (Graza-card placeholders) */
+    --stone:      #e8e0d0;
     --stone-dark: #c8c0b0;
 
     /* Panel / cream surface */
-    --panel: #fcf8ea;
-    --cream: #fcf8ea;
+    --panel: #f3e8d5;
+    --cream: #f3e8d5;
 
-    /* Legacy aliases so existing styles don't break */
+    /* Legacy aliases — kept so any old refs keep resolving */
     --bg: var(--bg-pink);
     --bg-alt: var(--bg-butter);
     --bg-sage: var(--bg-butter);
@@ -997,10 +997,11 @@
     position: relative;
   }
 
-  .how-col-1 { background: var(--bg-cream); }
-  .how-col-2 { background: var(--bg-butter); }
-  .how-col-3 { background: var(--bg-pink); }
-  .how-col-4 { background: var(--bg-blue); }
+  .how-col-1 { background: #f3e8d5; }
+  .how-col-2 { background: #e89548; }
+  .how-col-3 { background: #c84d1c; color: var(--cream); }
+  .how-col-3 .how-body, .how-col-3 .how-label { color: var(--cream); }
+  .how-col-4 { background: #d9d6b5; }
 
   .how-body {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -1122,7 +1123,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--hot-orange);
+    background: var(--lime);
     border: 2px solid var(--ink);
     transform: translateX(-50%);
     transition: left 0.12s linear;
