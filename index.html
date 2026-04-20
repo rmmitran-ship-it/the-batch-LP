@@ -9,34 +9,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Earth-tone palette (from the reference image) */
+    /* Palette: mustard / cream / tomato / blue / lavender */
 
-    /* Pastel grounds */
-    --bg-pink:    #f3e8d5;  /* cream — hero/nav ground */
-    --bg-butter:  #d9d6b5;  /* sage  — kitchen strip / secondary sections */
-    --bg-blue:    #d9d6b5;  /* sage  — graza 3-card ground (was cool blue) */
-    --bg-cream:   #f3e8d5;  /* cream */
+    /* Cream grounds */
+    --bg-pink:    #EFE2BA;  /* cream */
+    --bg-butter:  #C5CBE3;  /* lavender — secondary sections */
+    --bg-blue:    #C5CBE3;  /* lavender */
+    --bg-cream:   #EFE2BA;  /* cream */
 
     /* Saturated accents */
-    --hot-orange: #c84d1c;  /* rust  — hero wordmark, past-batches bg, big moments */
-    --lime:       #e89548;  /* light orange — CTAs, ribbon, badges, arrow circles */
-    --burgundy:   #c84d1c;  /* rust — italic-serif accents */
-    --hot-pink:   #e89548;  /* light orange */
+    --hot-orange: #F13C20;  /* tomato — hero wordmark, big moments */
+    --lime:       #D79922;  /* mustard — CTAs, ribbon, badges */
+    --burgundy:   #F13C20;  /* tomato — italic-serif accents */
+    --hot-pink:   #D79922;  /* mustard */
 
     /* Hover state for lime pills */
-    --lime-dark:  #b87530;
+    --lime-dark:  #A6731A;
 
-    /* Ink — now dark forest green instead of near-black */
-    --ink:        #0f2a22;
-    --ink-soft:   #2c4237;
+    /* Ink — deep blue from palette */
+    --ink:        #4056A1;
+    --ink-soft:   #6070B5;
 
-    /* Photo stone neutral (Graza-card placeholders) */
-    --stone:      #e8e0d0;
-    --stone-dark: #c8c0b0;
+    /* Lavender stone neutral */
+    --stone:      #C5CBE3;
+    --stone-dark: #A5ADCF;
 
     /* Panel / cream surface */
-    --panel: #f3e8d5;
-    --cream: #f3e8d5;
+    --panel: #EFE2BA;
+    --cream: #EFE2BA;
 
     /* Legacy aliases — kept so any old refs keep resolving */
     --bg: var(--bg-pink);
@@ -609,7 +609,7 @@
     height: 720px;
     right: -180px;
     top: -80px;
-    background: #f6d8c4;
+    background: #F6E3A0;
     border-radius: 62% 38% 48% 52% / 55% 45% 55% 45%;
     z-index: 0;
     opacity: 0.55;
@@ -1195,11 +1195,11 @@
     position: relative;
   }
 
-  .how-col-1 { background: #f3e8d5; }
-  .how-col-2 { background: #e89548; }
-  .how-col-3 { background: #c84d1c; color: var(--cream); }
+  .how-col-1 { background: var(--cream); }
+  .how-col-2 { background: var(--lime); }
+  .how-col-3 { background: var(--hot-orange); color: var(--cream); }
   .how-col-3 .how-body, .how-col-3 .how-label { color: var(--cream); }
-  .how-col-4 { background: #d9d6b5; }
+  .how-col-4 { background: var(--stone); }
 
   .how-body {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -1919,7 +1919,6 @@
         <video class="gcard-illustration-img" autoplay muted loop playsinline preload="metadata">
           <source src="lets-batch-vid1.mp4" type="video/mp4">
         </video>
-        <img src="logo-vol-02.png" alt="Let's Batch — Volume 02" class="gcard-logo-overlay">
       </div>
       <div class="gcard-body">
         <h3 class="gcard-title">Next up: <em>Batch 02.</em></h3>
