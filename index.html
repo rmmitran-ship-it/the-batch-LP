@@ -429,6 +429,17 @@
 
   .gcard-credit:hover { background: #fff; }
 
+  .gcard-logo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    height: auto;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+  }
+
   .gcard-illustration .brief {
     display: block;
     margin-top: 10px;
@@ -1832,10 +1843,10 @@
   <div class="graza-cards graza-cards--single">
     <div class="gcard">
       <div class="gcard-media gcard-media--illustrated">
-        <span class="gcard-tag">BATCH 02</span>
-        <span class="gcard-vol">VOL 02</span>
-        <img src="CH0075-1536x983.jpg" alt="Illustration of a cutting board with a knife and chopped vegetables" class="gcard-illustration-img">
-        <a href="https://www.theartworksinc.com/artist/claire-harrup/" target="_blank" rel="noopener" class="gcard-credit">ill. Claire Harrup</a>
+        <video class="gcard-illustration-img" autoplay muted loop playsinline preload="metadata">
+          <source src="lets-batch-vid1.mp4" type="video/mp4">
+        </video>
+        <img src="logo-vol-02.png" alt="Let's Batch — Volume 02" class="gcard-logo-overlay">
       </div>
       <div class="gcard-body">
         <h3 class="gcard-title">Next up: <em>Batch 02.</em></h3>
