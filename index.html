@@ -353,6 +353,25 @@
     display: inline-block;
   }
 
+  .gcard-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .gcard-chip {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    padding: 6px 14px;
+    border-radius: 40px;
+  }
+
   @media (max-width: 780px) {
     .graza-cards--single .gcard {
       grid-template-columns: 1fr;
@@ -1921,11 +1940,15 @@
         </video>
       </div>
       <div class="gcard-body">
-        <h3 class="gcard-title">Next up: <em>Batch 02.</em></h3>
+        <h3 class="gcard-title">Next up: <em>Batch #02.</em></h3>
         <p class="gcard-subtitle">From farm to table</p>
-        <p class="gcard-when">May 12 · Akasha House</p>
-        <p class="gcard-text">Elias is bringing veggies straight from his regenerative farm at <a href="https://viriditas.farm/" target="_blank" rel="noopener">Viriditas</a> — come cook with him at Akasha House, Poble Nou. Afterwork, 6PM.</p>
-        <a href="#" class="gcard-cta">Reserve your spot</a>
+        <p class="gcard-when">May 12 · 6PM · Akasha House, Poble Nou</p>
+        <p class="gcard-text">Elias grows veggies at <a href="https://viriditas.farm/" target="_blank" rel="noopener">Viriditas</a>, a regenerative farm 40 minutes from Barcelona. On May 12, he's bringing a crate of whatever's in season that week, and we're cooking it together at Akasha House.</p>
+        <div class="gcard-chips">
+          <span class="gcard-chip">Twelve seats</span>
+          <span class="gcard-chip">Vegetarian</span>
+        </div>
+        <a href="#" class="gcard-cta">Reserve your spot →</a>
       </div>
     </div>
   </div>
@@ -2165,45 +2188,12 @@
       </div>
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">The ingredients and camaraderie.</p>
-        <div class="testi-author">
-          <div class="testi-avatar"></div>
-          <div>
-            <div class="testi-name">[NAME]</div>
-            <div class="testi-meta">Vol 03 · Solo</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">Interesting recipes, quality products, clear organisation, pleasant staff.</p>
         <div class="testi-author">
           <div class="testi-avatar"></div>
           <div>
             <div class="testi-name">[NAME]</div>
             <div class="testi-meta">Vol 02 · Solo</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Cooking plant-based, fresh, seasonal, KM 0.</p>
-        <div class="testi-author">
-          <div class="testi-avatar"></div>
-          <div>
-            <div class="testi-name">[NAME]</div>
-            <div class="testi-meta">Vol 03 · Pair</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card accent">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Came alone. Didn't leave alone.</p>
-        <div class="testi-author">
-          <div class="testi-avatar"></div>
-          <div>
-            <div class="testi-name">[NAME]</div>
-            <div class="testi-meta">Vol 01 · Solo</div>
           </div>
         </div>
       </div>
