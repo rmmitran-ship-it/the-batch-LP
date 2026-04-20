@@ -565,6 +565,79 @@
     background-repeat: repeat-x, repeat-x;
   }
 
+  /* ==================== MARQUEE TICKER ==================== */
+  .marquee {
+    background: var(--hot-orange);
+    color: var(--cream);
+    overflow: hidden;
+    padding: 22px 0;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .marquee-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee 38s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track span {
+    font-family: 'Titan One', 'Arial Black', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
+    letter-spacing: -0.5px;
+    padding: 0 40px;
+    display: inline-block;
+  }
+  .marquee-track span::after {
+    content: '•';
+    margin-left: 80px;
+    opacity: 0.6;
+  }
+  @keyframes marquee {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+
+  /* ==================== ORGANIC BLOB / TILT (Batch 02) ==================== */
+  .graza-section { position: relative; overflow: hidden; }
+  .graza-section::before {
+    content: '';
+    position: absolute;
+    width: 720px;
+    height: 720px;
+    right: -180px;
+    top: -80px;
+    background: #f6d8c4;
+    border-radius: 62% 38% 48% 52% / 55% 45% 55% 45%;
+    z-index: 0;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .graza-section::after {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    left: -120px;
+    bottom: -140px;
+    background: var(--stone);
+    border-radius: 38% 62% 58% 42% / 48% 52% 48% 52%;
+    z-index: 0;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .graza-section > * { position: relative; z-index: 1; }
+
+  .graza-cards--single .gcard-media {
+    transform: rotate(-1.8deg);
+    transition: transform 0.5s ease;
+  }
+  .graza-cards--single .gcard-media:hover {
+    transform: rotate(0deg) scale(1.01);
+  }
+
   /* ==================== PRICING ==================== */
   .pricing {
     background: var(--bg-butter);
@@ -1858,6 +1931,13 @@
     </div>
   </div>
 </section>
+
+<!-- ==================== MARQUEE TICKER (kinetic type) ==================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>LET'S BATCH</span><span>BATCH 02</span><span>MAY 12</span><span>POBLE NOU</span><span>VIRIDITAS FARM</span><span>RESERVE YOUR SEAT</span><span>FARM TO TABLE</span><span>LET'S BATCH</span><span>BATCH 02</span><span>MAY 12</span><span>POBLE NOU</span><span>VIRIDITAS FARM</span><span>RESERVE YOUR SEAT</span><span>FARM TO TABLE</span>
+  </div>
+</div>
 
 <!-- ==================== PRICING ==================== -->
 <section class="pricing">
