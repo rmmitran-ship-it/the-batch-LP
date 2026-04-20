@@ -120,7 +120,27 @@
     margin-bottom: 48px;
   }
 
-  .hero-logo .line { display: block; }
+  .hero-logo .line { display: block; transform-origin: 0% 100%; }
+
+  .hero-logo .line:first-child {
+    transform-origin: 0% 100%;
+    animation: clapperboard 2.6s cubic-bezier(.4,.05,.3,1) infinite;
+    will-change: transform;
+  }
+
+  @keyframes clapperboard {
+    0%   { transform: rotate(-28deg); }
+    35%  { transform: rotate(-28deg); }
+    50%  { transform: rotate(0deg); }
+    55%  { transform: rotate(-3deg); }
+    62%  { transform: rotate(0deg); }
+    82%  { transform: rotate(0deg); }
+    100% { transform: rotate(-28deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-logo .line:first-child { animation: none; }
+  }
 
   .hero-manifesto {
     font-family: 'Fraunces', serif;
