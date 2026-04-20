@@ -291,10 +291,10 @@
     align-items: flex-start;
   }
 
-  .graza-cards--single .gcard-body {
+  .graza-cards--single .gcard {
     background: var(--bg-blue);
     border-radius: 32px;
-    padding: 48px 44px;
+    padding: 48px;
     border: 2px solid var(--ink);
     box-shadow: 8px 8px 0 var(--ink);
   }
@@ -658,11 +658,10 @@
   .graza-section > * { position: relative; z-index: 1; }
 
   .graza-cards--single .gcard-media {
-    transform: rotate(-1.8deg);
     transition: transform 0.5s ease;
   }
   .graza-cards--single .gcard-media:hover {
-    transform: rotate(0deg) scale(1.01);
+    transform: scale(1.01);
   }
 
   /* ==================== PRICING ==================== */
