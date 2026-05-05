@@ -45,17 +45,18 @@ Past Batch references should be specific (e.g. "Batch 01") rather than generic (
 
 ## Pricing model (canonical, do not change without founder approval)
 
-All prices are **per seat**, not per group total. Six meals per person per Batch.
+All prices are **per seat**, not per group total. Six meals per person per Batch. There is no early-bird discount.
 
-| Tier | Early-bird per seat | Full price per seat |
+| Tier | Per seat | Group total |
 |---|---|---|
-| Solo | €75 | €85 |
-| Pair | €67 | €80 |
-| Table of 4 | €59 | €75 |
+| Solo | €85 | €85 |
+| Pair | €80 | €160 |
+| Table of 4 | €75 | €300 |
 
-- Early-bird deadline: typically two weeks before the Batch.
-- For Batch 02: early-bird ends Sunday 12 May 2026; Batch is Tuesday 26 May 2026.
 - "Cost per meal" line on cards is a derived display value: price ÷ 6 meals, rounded to the nearest €0.50.
-- Group totals shown on Pair / Table cards as a small subtext (e.g. "€134 for two", "€236 for four"). Always confirm: total = per-seat price × number of seats.
+  - Solo: €85 / 6 = €14.17 → displayed as **€14**
+  - Pair: €80 / 6 = €13.33 → displayed as **€13.50**
+  - Table of 4: €75 / 6 = €12.50 → displayed as **€12.50**
+- Group totals shown on Pair / Table cards as a small subtext ("€160 for two", "€300 for four"). Always confirm: total = per-seat price × number of seats.
 
 If the founder wants to change pricing, update this table first and apply the rest of the changes downstream.
