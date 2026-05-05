@@ -37,7 +37,7 @@ Past Batch references should be specific (e.g. "Batch 01") rather than generic (
 ### Timeline (as of writing)
 
 - **Batch 01** — December 2025, Poble Nou, vegetarian (the only Batch that has actually happened)
-- **Batch 02** — May 26, 2026, 6PM, Akasha House, Poble Nou (upcoming)
+- **Batch 02** — June 10, 2026, 6PM, Akasha House, Poble Nou (upcoming)
 
 ### Recurring placeholders
 
