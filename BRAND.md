@@ -50,8 +50,8 @@ All prices are **per seat**, not per group total. Six meals per person per Batch
 | Tier | Early-bird per seat | Full price per seat |
 |---|---|---|
 | Solo | €75 | €85 |
-| Pair | €67 | €75 |
-| Table of 4 | €59 | €65 |
+| Pair | €67 | €80 |
+| Table of 4 | €59 | €75 |
 
 - Early-bird deadline: typically two weeks before the Batch.
 - For Batch 02: early-bird ends Sunday 12 May 2026; Batch is Tuesday 26 May 2026.
